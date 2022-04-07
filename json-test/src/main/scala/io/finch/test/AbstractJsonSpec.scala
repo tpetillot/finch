@@ -1,9 +1,5 @@
 package io.finch.test
 
-import java.nio.charset.{Charset, StandardCharsets}
-
-import scala.util.Try
-
 import cats.instances.AllInstances
 import cats.{Comonad, Eq, Functor}
 import io.circe.Decoder
@@ -15,10 +11,13 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.scalacheck.Checkers
 import org.typelevel.discipline.Laws
 
+import java.nio.charset.{Charset, StandardCharsets}
+import scala.util.Try
+
 abstract class AbstractJsonSpec extends AnyFlatSpec with Matchers with Checkers with AllInstances {
 
   implicit val comonadEither: Comonad[Try] = new Comonad[Try] {
-    def extract[A](x: Try[A]): A = x.get //never do it in production, kids
+    def extract[A](x: Try[A]): A = x.get // never do it in production, kids
 
     def coflatMap[A, B](fa: Try[A])(f: Try[A] => B): Try[B] = Try(f(fa))
 

@@ -1,12 +1,12 @@
 package io.finch
 
-import cats.effect.Effect
+import cats.effect.Async
+import cats.effect.std.Dispatcher
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.{Request, Response}
 import shapeless._
 
-/**
-  * Bootstraps a Finagle HTTP service out of the collection of Finch endpoints.
+/** Bootstraps a Finagle HTTP service out of the collection of Finch endpoints.
   *
   * {{{
   * val api: Service[Request, Response] = Bootstrap
@@ -16,24 +16,24 @@ import shapeless._
   *  .toService
   * }}}
   *
-  * == Supported Configuration Options ==
+  * ==Supported Configuration Options==
   *
-  * - `includeDateHeader` (default: `true`): whether or not to include the Date header into
-  *   each response (see RFC2616, section 14.18)
+  *   - `includeDateHeader` (default: `true`): whether or not to include the Date header into each response (see RFC2616, section 14.18)
   *
-  * - `includeServerHeader` (default: `true`): whether or not to include the Server header into
-  *   each response (see RFC2616, section 14.38)
+  *   - `includeServerHeader` (default: `true`): whether or not to include the Server header into each response (see RFC2616, section 14.38)
   *
-  * - `enableMethodNotAllowed` (default: `false`): whether or not to enable 405 MethodNotAllowed HTTP
-  *   response (see RFC2616, section 10.4.6)
+  *   - `enableMethodNotAllowed` (default: `false`): whether or not to enable 405 MethodNotAllowed HTTP response (see RFC2616, section 10.4.6)
   *
-  * - `enableUnsupportedMediaType` (default: `false`) whether or not to enable 415
-  *   UnsupportedMediaType HTTP response (see RFC7231, section 6.5.13)
+  *   - `enableUnsupportedMediaType` (default: `false`) whether or not to enable 415 UnsupportedMediaType HTTP response (see RFC7231, section 6.5.13)
   *
-  * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
-  * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html
-  * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-  * @see https://tools.ietf.org/html/rfc7231#section-6.5.13
+  * @see
+  *   https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+  * @see
+  *   https://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html
+  * @see
+  *   https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+  * @see
+  *   https://tools.ietf.org/html/rfc7231#section-6.5.13
   */
 class Bootstrap[F[_], ES <: HList, CTS <: HList](
     val endpoints: ES,
@@ -82,7 +82,7 @@ class Bootstrap[F[_], ES <: HList, CTS <: HList](
     ts.apply(endpoints, opts, ctx)
   }
 
-  def toService(implicit F: Effect[F], ts: Compile[F, ES, CTS]): Service[Request, Response] =
+  def toService(implicit F: Async[F], dispatcher: Dispatcher[F], ts: Compile[F, ES, CTS]): Service[Request, Response] =
     Endpoint.toService(compile)
 
   final override def toString: String = s"Bootstrap($endpoints)"

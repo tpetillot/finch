@@ -1,7 +1,6 @@
 package io.finch.iteratee
 
-import scala.util.Random
-
+import cats.effect.std.Dispatcher
 import cats.effect.{ExitCode, IO, IOApp, Resource}
 import com.twitter.finagle.{Http, ListeningServer}
 import com.twitter.util.Future
@@ -11,15 +10,14 @@ import io.finch.catsEffect._
 import io.finch.circe._
 import io.iteratee.{Enumerator, Iteratee}
 
-/**
-  * A Finch application featuring iteratee-based streaming support.
-  * This approach is more advanced and performant then basic [[com.twitter.concurrent.AsyncStream]]
+import scala.util.Random
+
+/** A Finch application featuring iteratee-based streaming support. This approach is more advanced and performant then basic
+  * [[com.twitter.concurrent.AsyncStream]]
   *
   * There are three endpoints in this example:
   *
-  *  1. `sumJson` - streaming request
-  *  2. `streamJson` - streaming response
-  *  3. `isPrime` - end-to-end (request - response) streaming
+  *   1. `sumJson` - streaming request 2. `streamJson` - streaming response 3. `isPrime` - end-to-end (request - response) streaming
   *
   * Use the following sbt command to run the application.
   *
@@ -64,13 +62,13 @@ object Main extends IOApp {
       Ok(enum.map(_.isPrime))
     }
 
-  def serve: IO[ListeningServer] = IO(
+  def serve(implicit dispatcher: Dispatcher[IO]): IO[ListeningServer] = IO(
     Http.server.withStreaming(enabled = true).serve(":8081", (sumJson :+: streamJson :+: isPrime).toServiceAs[Application.Json])
   )
 
-  def run(args: List[String]): IO[ExitCode] = {
-    val server = Resource.make(serve)(s => IO.suspend(implicitly[ToAsync[Future, IO]].apply(s.close())))
-
-    server.use(_ => IO.never).as(ExitCode.Success)
-  }
+  def run(args: List[String]): IO[ExitCode] =
+    (for {
+      dispatcher <- Dispatcher[IO]
+      _ <- Resource.make(serve(dispatcher))(s => IO.defer(implicitly[ToAsync[Future, IO]].apply(s.close())))
+    } yield ()).use(_ => IO.never).as(ExitCode.Success)
 }

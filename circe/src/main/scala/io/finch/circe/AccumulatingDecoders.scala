@@ -1,7 +1,5 @@
 package io.finch.circe
 
-import java.nio.charset.StandardCharsets
-
 import cats.MonadError
 import cats.data.Validated
 import io.circe._
@@ -11,10 +9,11 @@ import io.finch.internal.HttpContent
 import io.finch.{Application, Decode, DecodeStream}
 import io.iteratee.{Enumeratee, Enumerator}
 
+import java.nio.charset.StandardCharsets
+
 trait AccumulatingDecoders {
 
-  /**
-    * Maps a Circe's [[Decoder]] to Finch's [[Decode]].
+  /** Maps a Circe's [[Decoder]] to Finch's [[Decode]].
     */
   implicit def decodeCirce[A: Decoder]: Decode.Json[A] = Decode.json { (b, cs) =>
     val attemptJson = cs match {
