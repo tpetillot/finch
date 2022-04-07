@@ -8,16 +8,16 @@ lazy val buildSettings = Seq(
 )
 
 lazy val twitterVersion = "22.3.0"
-lazy val circeVersion = "0.13.0"
+lazy val circeVersion = "0.14.1"
+lazy val circeFs2Version = "0.14.0"
 lazy val circeIterateeVersion = "0.13.0-M2"
-lazy val circeFs2Version = "0.13.0"
 lazy val shapelessVersion = "2.3.9"
 lazy val catsVersion = "2.7.0"
 lazy val argonautVersion = "6.3.8"
 lazy val iterateeVersion = "0.20.0"
 lazy val refinedVersion = "0.9.28"
 lazy val catsEffectVersion = "3.3.11"
-lazy val fs2Version = "2.5.10"
+lazy val fs2Version = "3.2.7"
 
 def compilerOptions(scalaVersion: String): Seq[String] = Seq(
   "-deprecation",

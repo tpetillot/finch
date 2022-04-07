@@ -1,5 +1,6 @@
 package io.finch.iteratee
 
+import cats.effect.unsafe.implicits.global
 import cats.effect.IO
 import com.twitter.io.Buf
 import io.finch._

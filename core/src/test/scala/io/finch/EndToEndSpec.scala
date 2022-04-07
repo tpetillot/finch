@@ -36,6 +36,7 @@ class EndToEndSpec extends FinchSpec {
     implicit val encodeException: Encode.Text[Exception] =
       Encode.text((_, cs) => Buf.ByteArray.Owned("ERR!".getBytes(cs.name)))
 
+    println("I'M GONNA SERVE THIS!")
     val service: Service[Request, Response] = (
       get("foo" :: path[String]) { s: String => Ok(Foo(s)) } :+:
         get("bar")(Created("bar")) :+:

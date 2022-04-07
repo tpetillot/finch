@@ -4,13 +4,14 @@ import cats.effect.IO
 import fs2.Stream
 import io.finch.test.AbstractJsonSpec
 import io.iteratee.Enumerator
+import cats.effect.unsafe.implicits.global
 
 class CirceSpec extends AbstractJsonSpec {
   import io.finch.circe._
   checkJson("circe")
   checkStreamJson[Enumerator, IO]("circe-iteratee")(Enumerator.enumList, _.toVector.unsafeRunSync().toList)
   checkStreamJson[Stream, IO]("circe-fs2")(
-    list => Stream.fromIterator[IO](list.toIterator),
+    list => Stream.fromIterator[IO](list.toIterator, 1024),
     _.compile.toList.unsafeRunSync()
   )
 }

@@ -1,6 +1,8 @@
 package io.finch.wrk
 
 import cats.effect.IO
+import cats.effect.std.Dispatcher
+import cats.effect.unsafe.IORuntime
 import io.circe.generic.auto._
 import io.finch._
 import io.finch.circe._
@@ -18,5 +20,10 @@ import io.finch.circe._
   *   c = t * n * 1.5
   */
 object Finch extends Wrk {
-  serve(Endpoint[IO].lift(Payload("Hello, World!")).toServiceAs[Application.Json])
+
+  implicit val ioRunTime: IORuntime = IORuntime.global
+
+  Dispatcher[IO].use { implicit dispatcher =>
+    IO(serve(Endpoint[IO].lift(Payload("Hello, World!")).toServiceAs[Application.Json]))
+  }
 }
