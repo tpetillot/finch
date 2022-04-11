@@ -20,20 +20,20 @@ package object fs2 extends StreamAsyncInstances {
     }
 }
 
-trait StreamAsyncInstances extends StreamInstances  {
+trait StreamAsyncInstances extends StreamInstances {
 
   implicit def encodeJsonAsyncFs2Stream[F[_]: Async, A](implicit
-                                                        A: Encode.Json[A]
+      A: Encode.Json[A]
   ): EncodeStream.Json[F, Stream, A] =
     new EncodeNewLineDelimitedConcurrentFs2Stream[F, A, Application.Json]
 
   implicit def encodeSseAsyncFs2Stream[F[_]: Async, A](implicit
-                                                       A: Encode.Aux[A, Text.EventStream]
+      A: Encode.Aux[A, Text.EventStream]
   ): EncodeStream.Aux[F, Stream, A, Text.EventStream] =
     new EncodeNewLineDelimitedConcurrentFs2Stream[F, A, Text.EventStream]
 
   implicit def encodeTextAsyncFs2Stream[F[_]: Async, A](implicit
-                                                        A: Encode.Text[A]
+      A: Encode.Text[A]
   ): EncodeStream.Text[F, Stream, A] =
     new EncodeConcurrentFs2Stream[F, A, Text.Plain] {
       override protected def encodeChunk(chunk: A, cs: Charset): Buf = A(chunk, cs)

@@ -8,8 +8,7 @@ import com.twitter.io.Buf
 
 import scala.concurrent.Future
 
-/**
-  * Type class instances for non-Finch types.
+/** Type class instances for non-Finch types.
   */
 trait MissingInstances {
 

@@ -10,7 +10,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.Future
 
-class DivSpec extends AnyFlatSpec with Matchers  {
+class DivSpec extends AnyFlatSpec with Matchers {
   behavior of "the div endpoint"
 
   implicit val dispatcher: Dispatcher[IO] = new Dispatcher[IO] {

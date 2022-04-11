@@ -26,9 +26,8 @@ class EndpointSpec extends FinchSpec with BeforeAndAfterAll with MissingInstance
   private val executor: ExecutorService = Executors.newSingleThreadExecutor()
   private val blockingEc: ExecutionContextExecutorService = ExecutionContext.fromExecutorService(executor)
 
-  override def afterAll(): Unit = {
+  override def afterAll(): Unit =
     executor.shutdown()
-  }
 
   type EndpointIO[A] = Endpoint[IO, A]
 

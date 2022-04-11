@@ -10,8 +10,7 @@ import shapeless._
 import shapeless.labelled._
 import shapeless.poly._
 
-/**
-  * A type class empowering a generic derivation of [[Endpoint]]s from query string params.
+/** A type class empowering a generic derivation of [[Endpoint]]s from query string params.
   */
 trait FromParams[F[_], L <: HList] {
   def endpoint: Endpoint[F, L]

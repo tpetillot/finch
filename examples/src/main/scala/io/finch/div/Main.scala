@@ -7,8 +7,7 @@ import com.twitter.util.Await
 import io.finch._
 import cats.implicits._
 
-/**
-  * A tiny Finch application that serves a single endpoint `POST /:a/b:` that divides `a` by `b`.
+/** A tiny Finch application that serves a single endpoint `POST /:a/b:` that divides `a` by `b`.
   *
   * Use the following sbt command to run the application.
   *
@@ -33,8 +32,10 @@ object Main extends IOApp with Endpoint.Module[IO] {
     BadRequest(e)
   }
 
-  override def run(args: List[String]): IO[ExitCode] = Dispatcher[IO].use { implicit dispatcher =>
-    IO(Await.ready(Http.server.serve(":8081", div.toServiceAs[Text.Plain])))
-  }.as(ExitCode.Success)
+  override def run(args: List[String]): IO[ExitCode] = Dispatcher[IO]
+    .use { implicit dispatcher =>
+      IO(Await.ready(Http.server.serve(":8081", div.toServiceAs[Text.Plain])))
+    }
+    .as(ExitCode.Success)
 
 }

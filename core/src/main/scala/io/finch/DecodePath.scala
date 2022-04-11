@@ -4,9 +4,7 @@ import java.util.UUID
 
 import io.finch.internal.TooFastString
 
-/**
-  * Decodes an HTTP path (eg: /foo/bar/baz) represented as UTF-8 `String` into
-  * an arbitrary type `A`.
+/** Decodes an HTTP path (eg: /foo/bar/baz) represented as UTF-8 `String` into an arbitrary type `A`.
   */
 trait DecodePath[A] {
   def apply(s: String): Option[A]

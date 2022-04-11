@@ -15,7 +15,8 @@ class App(
     idRef: Ref[IO, Int],
     storeRef: Ref[IO, Map[Int, Todo]],
     blockerEc: ExecutionContext
-)(implicit dispatcher: Dispatcher[IO] ) extends Endpoint.Module[IO] {
+)(implicit dispatcher: Dispatcher[IO])
+    extends Endpoint.Module[IO] {
 
   final val postedTodo: Endpoint[IO, Todo] =
     jsonBody[(Int, Boolean) => Todo].mapAsync(pt => idRef.modify(id => (id + 1, pt(id, false))))

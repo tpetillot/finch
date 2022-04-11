@@ -12,15 +12,12 @@ import io.finch.catsEffect._
 import io.finch.circe._
 import io.iteratee.{Enumerator, Iteratee}
 
-/**
-  * A Finch application featuring iteratee-based streaming support.
-  * This approach is more advanced and performant then basic [[com.twitter.concurrent.AsyncStream]]
+/** A Finch application featuring iteratee-based streaming support. This approach is more advanced and performant then basic
+  * [[com.twitter.concurrent.AsyncStream]]
   *
   * There are three endpoints in this example:
   *
-  *  1. `sumJson` - streaming request
-  *  2. `streamJson` - streaming response
-  *  3. `isPrime` - end-to-end (request - response) streaming
+  *   1. `sumJson` - streaming request 2. `streamJson` - streaming response 3. `isPrime` - end-to-end (request - response) streaming
   *
   * Use the following sbt command to run the application.
   *

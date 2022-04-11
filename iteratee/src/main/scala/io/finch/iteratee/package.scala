@@ -60,8 +60,8 @@ trait IterateeInstances {
   }
 
   abstract protected class EncodeEnumerator[F[_], A, CT <: String](implicit
-                                                                   F: Async[F],
-                                                                   TE: ToAsync[Future, F]
+      F: Async[F],
+      TE: ToAsync[Future, F]
   ) extends EncodeStream[F, Enumerator, A]
       with (Either[Throwable, Unit] => IO[Unit]) {
 
