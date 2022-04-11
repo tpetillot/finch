@@ -1,13 +1,13 @@
 package io.finch
 
 import cats.effect.Sync
-
-import scala.reflect.ClassTag
 import cats.effect.std.Dispatcher
 import cats.instances.AllInstances
 import io.netty.handler.codec.http.QueryStringEncoder
 import org.scalacheck.{Arbitrary, Prop}
 import org.typelevel.discipline.Laws
+
+import scala.reflect.ClassTag
 
 abstract class ExtractPathLaws[F[_]: Dispatcher, A] extends Laws with MissingInstances with AllInstances {
   def decode: DecodePath[A]

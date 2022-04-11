@@ -2,10 +2,10 @@ package io.finch
 
 import cats.effect.Async
 import cats.effect.std.Dispatcher
+import cats.implicits._
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.util.{Future, Promise}
-import cats.implicits._
 
 /** Representation of `Endpoint.Compiled` as Finagle Service
   */

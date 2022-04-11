@@ -1,7 +1,7 @@
 package io.finch.middleware
 
-import cats.effect.{ExitCode, IO, IOApp}
 import cats.effect.std.Dispatcher
+import cats.effect.{ExitCode, IO, IOApp}
 import com.twitter.finagle.Http
 import com.twitter.finagle.http.{Response, Status}
 import com.twitter.util.{Await, Time}

@@ -1,6 +1,5 @@
 package io.finch
 
-import scala.reflect.ClassTag
 import cats.Eq
 import cats.effect.std.Dispatcher
 import cats.instances.AllInstances
@@ -8,6 +7,8 @@ import cats.laws._
 import cats.laws.discipline._
 import org.scalacheck.{Arbitrary, Prop}
 import org.typelevel.discipline.Laws
+
+import scala.reflect.ClassTag
 
 abstract class EntityEndpointLaws[F[_]: Dispatcher, A] extends Laws with MissingInstances with AllInstances {
 

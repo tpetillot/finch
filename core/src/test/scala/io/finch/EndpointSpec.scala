@@ -1,8 +1,8 @@
 package io.finch
 
-import cats.effect.unsafe.implicits.global
 import cats.data.{NonEmptyList, WriterT}
 import cats.effect.std.Dispatcher
+import cats.effect.unsafe.implicits.global
 import cats.effect.{IO, Resource}
 import cats.laws._
 import cats.laws.discipline.SemigroupalTests.Isomorphisms
@@ -18,8 +18,8 @@ import java.io.{ByteArrayInputStream, InputStream}
 import java.net.URLEncoder
 import java.util.UUID
 import java.util.concurrent.{ExecutorService, Executors, TimeUnit}
-import scala.concurrent.{ExecutionContext, ExecutionContextExecutorService, Future}
 import scala.concurrent.duration.Duration
+import scala.concurrent.{ExecutionContext, ExecutionContextExecutorService, Future}
 
 class EndpointSpec extends FinchSpec with BeforeAndAfterAll with MissingInstances {
 

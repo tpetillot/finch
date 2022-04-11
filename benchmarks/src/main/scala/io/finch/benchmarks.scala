@@ -1,9 +1,8 @@
 package io.finch
 
-import java.nio.charset.{Charset, StandardCharsets}
-import java.util.concurrent.{ThreadLocalRandom, TimeUnit}
 import cats.effect.IO
 import cats.effect.std.Dispatcher
+import cats.effect.unsafe.implicits.global
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.io.Buf
@@ -13,8 +12,9 @@ import io.finch.circe._
 import io.finch.data.Foo
 import org.openjdk.jmh.annotations._
 import shapeless._
-import cats.effect.unsafe.implicits.global
 
+import java.nio.charset.{Charset, StandardCharsets}
+import java.util.concurrent.{ThreadLocalRandom, TimeUnit}
 import scala.concurrent.Future
 
 @BenchmarkMode(Array(Mode.AverageTime))

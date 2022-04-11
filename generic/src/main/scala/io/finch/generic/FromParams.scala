@@ -1,14 +1,14 @@
 package io.finch.generic
 
 import cats.Applicative
-
-import scala.reflect.ClassTag
 import cats.data.NonEmptyList
 import cats.effect.Sync
 import io.finch._
 import shapeless._
 import shapeless.labelled._
 import shapeless.poly._
+
+import scala.reflect.ClassTag
 
 /** A type class empowering a generic derivation of [[Endpoint]]s from query string params.
   */

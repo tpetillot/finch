@@ -1,8 +1,8 @@
 package io.finch.div
 
-import cats.effect.unsafe.implicits.global
 import cats.effect.IO
 import cats.effect.std.Dispatcher
+import cats.effect.unsafe.implicits.global
 import com.twitter.finagle.http.Status
 import io.finch.Input
 import org.scalatest.flatspec.AnyFlatSpec

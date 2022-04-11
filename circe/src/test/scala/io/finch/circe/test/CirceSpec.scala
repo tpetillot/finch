@@ -1,10 +1,10 @@
 package io.finch.circe.test
 
 import cats.effect.IO
+import cats.effect.unsafe.implicits.global
 import fs2.Stream
 import io.finch.test.AbstractJsonSpec
 import io.iteratee.Enumerator
-import cats.effect.unsafe.implicits.global
 
 class CirceSpec extends AbstractJsonSpec {
   import io.finch.circe._

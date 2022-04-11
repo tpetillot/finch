@@ -1,13 +1,13 @@
 package io.finch.todo
 
 import cats.effect.IO
+import cats.effect.Ref
+import cats.effect.std.Dispatcher
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.{Request, Response, Status}
 import io.circe.generic.auto._
 import io.finch._
 import io.finch.circe._
-import cats.effect.Ref
-import cats.effect.std.Dispatcher
 
 import scala.concurrent.ExecutionContext
 

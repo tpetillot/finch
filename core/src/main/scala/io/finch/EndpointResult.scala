@@ -1,11 +1,11 @@
 package io.finch
 
-import scala.concurrent.duration.Duration
 import cats.Id
 import cats.effect.std.Dispatcher
 import com.twitter.finagle.http.Method
 
 import scala.concurrent.TimeoutException
+import scala.concurrent.duration.Duration
 
 /** A result returned from an [[Endpoint]]. This models `Option[(Input, Future[Output])]` and represents two cases:
   *

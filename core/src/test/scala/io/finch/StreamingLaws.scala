@@ -2,8 +2,6 @@ package io.finch
 
 import cats.effect.Sync
 import cats.effect.std.Dispatcher
-
-import java.nio.charset.Charset
 import cats.instances.AllInstances
 import cats.laws._
 import cats.laws.discipline._
@@ -11,6 +9,8 @@ import com.twitter.finagle.http.Request
 import com.twitter.io.{Buf, Pipe}
 import org.scalacheck.{Arbitrary, Prop}
 import org.typelevel.discipline.Laws
+
+import java.nio.charset.Charset
 
 abstract class StreamingLaws[S[_[_], _], F[_]: Sync](implicit dispatcher: Dispatcher[F]) extends Laws with AllInstances with MissingInstances {
 
